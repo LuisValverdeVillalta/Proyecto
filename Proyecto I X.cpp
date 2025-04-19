@@ -128,6 +128,48 @@ void realizarpagos (){
 }while ((opcion=='s') || (opcion=='S'));
 }
 
+void modificar(){
+	
+	     if (BuscarPago()>=0) 
+    {
+    opciones = 0;
+    printf("1- Cedula  \n");
+        printf("2- Nombre \n");
+        
+   printf("Digite el campo a modificar \n");
+        scanf("%i", &opciones); 
+
+         switch (opciones) {
+            case 1: 
+                   printf("Ingrese la nueva Cedula: \n");
+                   scanf("%s", cedula[localindice]);
+       break;
+            case 2: printf("Ingrese el nuevo nombre: \n");
+                    scanf("%s", nombre[localindice]);
+                    break;
+            
+            default: printf("Opcion incorrecta \n");
+                     break;
+
+        printf("El pago ha sido Modificado \n");
+     }
+}
+   else 
+{
+     printf("El pago no existe \n");
+     }
+
+    getch();
+}
+
+	
+	
+	
+	
+
+
+
+
 void menu(){
 	system("cls");
 	int opcion = 0;
@@ -150,9 +192,9 @@ void menu(){
 		break;
 		case 3: consultarpagos();
 		break;
-		case 4:;
+		case 4: modificar();
 		break;
-		case 5: ;
+		case 5: Eliminar();
 		break;
 		case 6: submenureportes();
 		break;
@@ -164,7 +206,36 @@ void menu(){
 	
 }
 	
-		
+	void Eliminar(){
+
+     if (BuscarPago()>=0) 
+   {
+       Pago[localindice] = -1;
+        strcpy(nombre[localindice], "-"); 
+        strcpy(cedula[localindice], "-"); 
+        printf("El pago ha sido eliminado \n");
+     } else 
+    {
+     printf("El pago no existe \n");
+     }
+
+    getch();
+}
+	
+	
+	void ReporteFactura() {
+    system("cls");
+    printf("*** Reportes *** \n");
+    printf("Pagos por factura  \n");
+    for (int i = 0; i < TAM; i++) {   
+     if (Pagos[i] != -1) {
+            printf("%s \t %i  \n", numerofactura[indice]); 
+     }
+    }
+    printf("*** Pagos ***\n");
+    getch();
+}
+
 
 void submenureportes(){
 	int opcion =0;
@@ -179,11 +250,11 @@ void submenureportes(){
 	
 	switch (opcion)
 	
-	{	case 1: 
+	{	case 1: consultarpagos();
 		 break;
 		case 2: 
 		 break;
-		case 3: 
+		case 3: ReporteFactura();
 		 break;
 		case 4: 
 		 break;
